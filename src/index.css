@@ -1,0 +1,23 @@
+body {
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+  height: -webkit-fill-available;
+}
+
+code {
+  font-family: "gilroyRegular";
+}
+
+@font-face {
+  font-family: "gilroyRegular";
+  src: local("gilroyRegular"),
+    url(./fonts/Gilroy-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "gilroyMedium";
+  src: local("gilroyMedium"), url(./fonts/Gilroy-Medium.ttf) format("truetype");
+}
