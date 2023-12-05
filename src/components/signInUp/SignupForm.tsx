@@ -60,7 +60,7 @@ const SignUpForm = () => {
       navigate("/sign-in");
     } catch (error) {
       if (isAxiosError(error) && error.response) {
-        ErrorNotify(error.response.data.message);
+        ErrorNotify(error.response.data.error);
       } else if (isAxiosError(error) && error.message) {
         ErrorNotify(error.message);
       } else console.log(error);

@@ -2,7 +2,11 @@ import {
   Box,
   Button,
   Center,
+  FormLabel,
   Input,
+  InputGroup,
+  InputRightAddon,
+  InputRightElement,
   NumberInput,
   NumberInputField,
   Spinner,
@@ -16,23 +20,22 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import ErrorNotify from "../common/ErrorNotify";
 import { InputStyle, TextErrorStyle } from "../common/FormStyle";
-import { Login } from "../common/api-call";
+import { SendCoin } from "../common/api-call";
+import useUser from "../../hooks/useUser";
+import authorize from "../../hooks/authorize";
 
 const schema = z.object({
-  phonenumber: z
-    .string()
-    .length(11, { message: "Please enter a valid phone number." }),
+  receiver: z.string().min(1),
 
-  password: z
-    .string({
-      required_error: "Password is required",
-    })
-    .min(5, { message: "Password should be at least 5 character" }),
+  value: z.string().min(1),
 });
 
 type FormData = z.infer<typeof schema>;
 
-const SignInForm = () => {
+const SendForm = () => {
+  const { data, isLoading: loading, error } = useUser();
+  authorize(error);
+
   const navigate = useNavigate();
 
   const {
@@ -47,11 +50,11 @@ const SignInForm = () => {
     setIsLoading(true);
 
     try {
-      await Login(data);
+      await SendCoin(data);
 
       setIsLoading(false);
 
-      navigate("/");
+      console.log("true");
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         ErrorNotify(error.response.data.error);
@@ -69,30 +72,46 @@ const SignInForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         style={{ width: "90%", paddingTop: "4px" }}
       >
-        <Box>
-          <NumberInput width="100%">
-            <NumberInputField
-              {...register("phonenumber")}
-              autoFocus
-              placeholder="Phone Number"
-              sx={InputStyle(!!errors.phonenumber)}
-            />
-          </NumberInput>
-        </Box>
-        {errors.phonenumber && (
-          <Text sx={TextErrorStyle}>{errors.phonenumber.message}</Text>
-        )}
+        <FormLabel htmlFor="myWallet">My Wallet Id:</FormLabel>
+        <Input
+          id="myWallet"
+          readOnly
+          value={data?.data.walletId}
+          sx={InputStyle(false)}
+        />
 
-        <Box marginTop="16px">
+        <Box marginTop="24px">
+          <FormLabel htmlFor="receiverWallet">Receiver Wallet Id:</FormLabel>
           <Input
-            type="password"
-            {...register("password")}
-            placeholder="Password"
-            sx={InputStyle(!!errors.password)}
+            id="receiverWallet"
+            {...register("receiver")}
+            placeholder="Receiver Wallet Id"
+            sx={InputStyle(!!errors.receiver)}
           />
         </Box>
-        {errors.password && (
-          <Text sx={TextErrorStyle}>{errors.password.message}</Text>
+        {errors.receiver && (
+          <Text sx={TextErrorStyle}>{errors.receiver.message}</Text>
+        )}
+
+        <Box marginTop="24px">
+          <FormLabel htmlFor="value">Amount:</FormLabel>
+          <InputGroup>
+            <NumberInput width="100%">
+              <NumberInputField
+                id="value"
+                {...register("value")}
+                autoFocus
+                placeholder="Value to Transfer"
+                sx={InputStyle(!!errors.value)}
+              />
+            </NumberInput>
+            <InputRightElement pt="10px" pr="16px">
+              <Text color="#555555">KC</Text>
+            </InputRightElement>
+          </InputGroup>
+        </Box>
+        {errors.value && (
+          <Text sx={TextErrorStyle}>{errors.value.message}</Text>
         )}
 
         <Center width="100%" marginTop="64px">
@@ -104,7 +123,7 @@ const SignInForm = () => {
             borderRadius="100px"
             width="100%"
           >
-            {isLoading ? <Spinner /> : "Sign In"}
+            {isLoading ? <Spinner /> : "Send"}
           </Button>
         </Center>
       </form>
@@ -112,4 +131,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SendForm;

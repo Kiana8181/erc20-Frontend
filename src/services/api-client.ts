@@ -33,7 +33,7 @@ class ApiClient<T> {
       .then((res) => res.data);
   };
 
-  post = (data: any, config: AxiosRequestConfig) => {
+  post = (config: AxiosRequestConfig, data?: any) => {
     axiosInstance.defaults.headers.Authorization = `Token: ${localStorage.getItem(
       "tokenKey"
     )}`;

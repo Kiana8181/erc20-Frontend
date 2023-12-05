@@ -7,6 +7,11 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import PrivateRoutes from "./pages/PrivateRoutes";
 import RedirectPage from "./pages/RedirectPage";
+import Main from "./components/dashboard/Main";
+import Receive from "./components/dashboard/Receive";
+import SendForm from "./components/dashboard/SendForm";
+import Send from "./components/dashboard/Send";
+import Buy from "./components/dashboard/Buy";
 
 const Router = createBrowserRouter([
   {
@@ -36,6 +41,24 @@ const Router = createBrowserRouter([
           {
             path: "dashboard",
             element: <Dashboard />,
+            children: [
+              {
+                path: "",
+                element: <Main />,
+              },
+              {
+                path: "send",
+                element: <Send />,
+              },
+              {
+                path: "receive",
+                element: <Receive />,
+              },
+              {
+                path: "buy",
+                element: <Buy />,
+              },
+            ],
           },
         ],
       },

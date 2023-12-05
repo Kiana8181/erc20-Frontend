@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
 import IsLoadingPage from "../components/common/IsLoadingPage";
-import useAuth from "../hooks/useAuth";
+import useUser from "../hooks/useUser";
 
 const RedirectPage = () => {
-  const { user, isLoading } = useAuth();
+  const { data: user, isLoading } = useUser();
 
   if (isLoading) return <IsLoadingPage />;
 
