@@ -12,14 +12,14 @@ import theme from "./theme";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <ColorModeScript />
-      <QueryClientProvider client={queryClient}>
-        <Toast />
-        <RouterProvider router={Router} />
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </ChakraProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ChakraProvider theme={theme}>
+    <ColorModeScript />
+    <QueryClientProvider client={queryClient}>
+      <Toast />
+      <RouterProvider router={Router} />
+      {/* <ReactQueryDevtools /> */}
+    </QueryClientProvider>
+  </ChakraProvider>
+  // </React.StrictMode>
 );

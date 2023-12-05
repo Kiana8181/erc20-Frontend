@@ -8,9 +8,9 @@ const ErrorPage = () => {
   return (
     <>
       <Center height="100vh" width="100vw">
-        <Box>
+        <Box width="100%">
           <Center>
-            <Image width="70vw" src={notFound} alt="not-found" />
+            <Image width="35%" src={notFound} alt="not-found" />
           </Center>
           <Center>
             <Text fontSize="5xl" textAlign="center">

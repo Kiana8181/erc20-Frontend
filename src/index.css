@@ -21,3 +21,21 @@ code {
   font-family: "gilroyMedium";
   src: local("gilroyMedium"), url(./fonts/Gilroy-Medium.ttf) format("truetype");
 }
+
+input,
+textarea,
+button,
+select,
+a,
+.css-1tbesnb,
+.css-1cqh9jq,
+.chakra-checkbox {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s;
+}

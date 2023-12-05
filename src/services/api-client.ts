@@ -4,7 +4,7 @@ export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json; charset=UTF-8",
-    authorization: `Token: ${localStorage.getItem("tokenKey")}`,
+    Authorization: `Token: ${localStorage.getItem("tokenKey")}`,
   },
 });
 

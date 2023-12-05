@@ -16,12 +16,18 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import ErrorNotify from "../common/ErrorNotify";
 import { InputStyle, TextErrorStyle } from "../common/FormStyle";
-import { Login } from "../common/api-call";
+import { Register } from "../common/api-call";
 
 const schema = z.object({
   phonenumber: z
     .string()
     .length(11, { message: "Please enter a valid phone number." }),
+
+  email: z.string().email({ message: "Please enter a valid email." }),
+
+  firstname: z.string().min(1),
+
+  lastname: z.string().min(1),
 
   password: z
     .string({
@@ -32,7 +38,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const SignInForm = () => {
+const SignUpForm = () => {
   const navigate = useNavigate();
 
   const {
@@ -47,11 +53,11 @@ const SignInForm = () => {
     setIsLoading(true);
 
     try {
-      await Login(data);
+      await Register(data);
 
       setIsLoading(false);
 
-      navigate("/dashboard");
+      navigate("/sign-in");
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         ErrorNotify(error.response.data.message);
@@ -85,8 +91,41 @@ const SignInForm = () => {
 
         <Box marginTop="16px">
           <Input
-            type="password"
+            {...register("email")}
+            placeholder="Email"
+            sx={InputStyle(!!errors.email)}
+          />
+        </Box>
+        {errors.password && (
+          <Text sx={TextErrorStyle}>{errors.email?.message}</Text>
+        )}
+
+        <Box marginTop="16px">
+          <Input
+            {...register("firstname")}
+            placeholder="First Name"
+            sx={InputStyle(!!errors.firstname)}
+          />
+        </Box>
+        {errors.password && (
+          <Text sx={TextErrorStyle}>{errors.firstname?.message}</Text>
+        )}
+
+        <Box marginTop="16px">
+          <Input
+            {...register("lastname")}
+            placeholder="Last Name"
+            sx={InputStyle(!!errors.lastname)}
+          />
+        </Box>
+        {errors.password && (
+          <Text sx={TextErrorStyle}>{errors.lastname?.message}</Text>
+        )}
+
+        <Box marginTop="16px">
+          <Input
             {...register("password")}
+            type="password"
             placeholder="Password"
             sx={InputStyle(!!errors.password)}
           />
@@ -104,7 +143,7 @@ const SignInForm = () => {
             borderRadius="100px"
             width="100%"
           >
-            {isLoading ? <Spinner /> : "Sign In"}
+            {isLoading ? <Spinner /> : "Sign Up"}
           </Button>
         </Center>
       </form>
@@ -112,4 +151,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

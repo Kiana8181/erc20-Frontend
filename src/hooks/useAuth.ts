@@ -34,7 +34,7 @@ const useAuth = () => {
 
   useEffect(() => {
     const request = axiosInstance.post<Data>(endpoint, {
-      headers: { authorization: `Token: ${localStorage.getItem("tokenKey")}` },
+      headers: { Authorization: `Token: ${localStorage.getItem("tokenKey")}` },
     });
 
     request
