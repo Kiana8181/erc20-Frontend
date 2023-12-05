@@ -1,7 +1,8 @@
+import { Box } from "@chakra-ui/react";
 import React from "react";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return <Box minH="100vh" width="100vw"></Box>;
 };
 
 export default Dashboard;

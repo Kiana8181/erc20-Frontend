@@ -51,7 +51,7 @@ const SignInForm = () => {
 
       setIsLoading(false);
 
-      navigate("/dashboard");
+      navigate("/home");
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         ErrorNotify(error.response.data.message);
