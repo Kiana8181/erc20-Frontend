@@ -4,7 +4,7 @@ import "../components/home/home.css";
 import { Box, Text, Image, Center, Button } from "@chakra-ui/react";
 import welcomeImage from "../assets/pictures/buyMain.svg";
 import { useNavigate } from "react-router-dom";
-
+import wave from "../assets/pictures/homePageWave.svg";
 const Home = () => {
   const navigate = useNavigate();
   return (
@@ -62,6 +62,7 @@ const Home = () => {
               Let's Get Started
             </Button>
           </Center>
+          {/* <Image src={wave} alt="wave" height="10px" width="100%" /> */}
         </Box>
         <Box className="section"></Box>
         <Box className="section"></Box>
