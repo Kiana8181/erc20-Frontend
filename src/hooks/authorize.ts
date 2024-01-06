@@ -7,7 +7,7 @@ const authorize = (error: any) => {
   if (isAxiosError(error) && error.response) {
     if ((error.response.status = 401)) {
       localStorage.removeItem("tokenKey");
-      navigate("/home");
+      navigate("/");
     }
   } else return;
 };

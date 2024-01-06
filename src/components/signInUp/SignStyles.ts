@@ -24,7 +24,6 @@ const HeaderBoxStyles = {
 const SubHeaderBoxStyles = {
   textAlign: "center",
   fontSize: "2xl",
-  fontFamily: "gilroyRegular",
   mb: "64px",
   mt: "24px",
 };

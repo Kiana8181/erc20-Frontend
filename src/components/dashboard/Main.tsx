@@ -7,7 +7,6 @@ import authorize from "../../hooks/authorize";
 
 const Main = () => {
   const { data, isLoading, error } = useUser();
-  authorize(error);
 
   const { data: balance } = useBalance();
 

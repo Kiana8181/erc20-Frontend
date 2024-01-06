@@ -26,22 +26,24 @@ const Dashboard = () => {
 
   return (
     <>
-      <NavBar onOpen={onOpen} />
+      {/* <NavBar onOpen={onOpen} /> */}
       <Grid
         templateAreas={{
           lg: `"aside main"`,
           base: `"main"`,
         }}
         templateColumns={{
-          lg: "200px 1fr",
+          lg: "repeat(6, 1fr)",
           base: "1fr",
         }}
         height="calc(100vh - 72px)"
       >
         <Show above="lg">
           <GridItem
+            height="100vh"
+            p="16px"
             area="aside"
-            boxShadow="0px 10px 10px 4px rgba(212, 224, 229, 0.30)"
+            // boxShadow="0px 10px 10px 4px rgba(212, 224, 229, 0.30)"
           >
             <Sidebar />
           </GridItem>
@@ -68,7 +70,7 @@ const Dashboard = () => {
           </DrawerContent>
         </Drawer>
 
-        <GridItem area="main">
+        <GridItem area="main" colSpan={5}>
           <Outlet />
         </GridItem>
       </Grid>

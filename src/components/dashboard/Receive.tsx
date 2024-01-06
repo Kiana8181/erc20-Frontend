@@ -6,7 +6,6 @@ import authorize from "../../hooks/authorize";
 
 const Receive = () => {
   const { data, isLoading, error } = useUser();
-  authorize(error);
 
   const copyToClipboard = (text: string) => {
     const textarea = document.createElement("textarea");
@@ -21,9 +20,8 @@ const Receive = () => {
   };
 
   return (
-    <Center>
+    <Center height="100%">
       <Box
-        mt="64px"
         width="60%"
         borderRadius="24px"
         boxShadow="0px 3px 10px 4px rgba(212, 224, 229, 0.70)"

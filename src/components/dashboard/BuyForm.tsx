@@ -11,6 +11,7 @@ import {
   NumberInputField,
   Spinner,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isAxiosError } from "axios";
@@ -23,6 +24,7 @@ import { InputStyle, TextErrorStyle } from "../common/FormStyle";
 import { BuyCoin } from "../common/api-call";
 import useUser from "../../hooks/useUser";
 import authorize from "../../hooks/authorize";
+import SuccessModal from "../common/SuccessModal";
 
 const schema = z.object({
   value: z.string().min(1),
@@ -31,18 +33,24 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const BuyForm = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const staticValue = 2.36;
+
   const { data: user, isLoading: loading, error } = useUser();
-  authorize(error);
 
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [amount, setAmount] = useState(0);
 
   const onSubmit = async (data: FieldValues) => {
     setIsLoading(true);
@@ -55,7 +63,7 @@ const BuyForm = () => {
 
       setIsLoading(false);
 
-      console.log("true");
+      onOpen();
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         ErrorNotify(error.response.data.error);
@@ -67,47 +75,65 @@ const BuyForm = () => {
   };
 
   return (
-    <Center>
-      <form
-        id="phone-form"
-        onSubmit={handleSubmit(onSubmit)}
-        style={{ width: "90%", paddingTop: "4px" }}
-      >
-        <Box marginTop="24px">
-          <FormLabel htmlFor="value">Amount:</FormLabel>
-          <InputGroup>
-            <NumberInput width="100%">
-              <NumberInputField
-                id="value"
-                {...register("value")}
-                autoFocus
-                placeholder="Value to Transfer"
-                sx={InputStyle(!!errors.value)}
-              />
-            </NumberInput>
-            <InputRightElement pt="10px" pr="16px">
-              <Text color="#555555">KC</Text>
-            </InputRightElement>
-          </InputGroup>
+    <>
+      <Box>
+        <Box>
+          <Center>
+            <Text
+              fontFamily="gilroyMedium"
+              fontSize="28px"
+              fontWeight="700"
+              lineHeight="normal"
+            >
+              1KC = {staticValue}$
+            </Text>
+          </Center>
         </Box>
-        {errors.value && (
-          <Text sx={TextErrorStyle}>{errors.value.message}</Text>
-        )}
+        <form id="phone-form" onSubmit={handleSubmit(onSubmit)} style={{}}>
+          <Box marginTop="24px">
+            <FormLabel htmlFor="value">Amount:</FormLabel>
+            <InputGroup>
+              <NumberInput width="100%">
+                <NumberInputField
+                  id="value"
+                  {...register("value")}
+                  autoFocus
+                  placeholder="Value to Transfer"
+                  sx={InputStyle(!!errors.value)}
+                />
+              </NumberInput>
 
-        <Center width="100%" marginTop="64px">
-          <Button
-            form="phone-form"
-            type="submit"
-            isDisabled={!isValid || isLoading}
-            colorScheme="purple"
-            borderRadius="100px"
-            width="100%"
-          >
-            {isLoading ? <Spinner /> : "Pay"}
-          </Button>
-        </Center>
-      </form>
-    </Center>
+              <InputRightElement pt="10px" pr="16px">
+                <Text color="#555555">KC</Text>
+              </InputRightElement>
+            </InputGroup>
+          </Box>
+          {errors.value && (
+            <Text sx={TextErrorStyle}>{errors.value.message}</Text>
+          )}
+
+          <Center width="100%" marginTop="64px">
+            <Button
+              form="phone-form"
+              type="submit"
+              isDisabled={!isValid || isLoading}
+              colorScheme="purple"
+              borderRadius="100px"
+              width="100%"
+            >
+              {isLoading ? <Spinner /> : "Pay"}
+            </Button>
+          </Center>
+        </form>
+      </Box>
+      <SuccessModal
+        isOpen={isOpen}
+        onClose={onClose}
+        text={`${
+          getValues().value
+        }KC has been successfully deposited into your wallet`}
+      />
+    </>
   );
 };
 

@@ -4,11 +4,17 @@ import BuyForm from "./BuyForm";
 
 const Buy = () => {
   return (
-    <SimpleGrid columns={{ sm: 1, md: 2 }} p="32px">
-      <Box>
-        <Image src={buyImage} alt="send" />
+    <SimpleGrid columns={{ sm: 1, md: 2 }} p="32px" height="100%">
+      <Image src={buyImage} alt="send" my="auto" mr="32px" />
+
+      <Box
+        my="auto"
+        boxShadow="0px 10px 10px 4px rgba(212, 224, 229, 0.30)"
+        borderRadius="32px"
+        p="32px"
+      >
+        <BuyForm />
       </Box>
-      <BuyForm />
     </SimpleGrid>
   );
 };

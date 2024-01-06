@@ -21,6 +21,9 @@ const theme = extendTheme({
     },
     white: "#F9F6EE",
   },
+  fonts: {
+    body: "gilroyRegular",
+  },
 });
 
 export default theme;

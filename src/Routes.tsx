@@ -12,6 +12,7 @@ import Receive from "./components/dashboard/Receive";
 import SendForm from "./components/dashboard/SendForm";
 import Send from "./components/dashboard/Send";
 import Buy from "./components/dashboard/Buy";
+import History from "./components/dashboard/History";
 
 const Router = createBrowserRouter([
   {
@@ -37,13 +38,14 @@ const Router = createBrowserRouter([
       },
       {
         element: <PrivateRoutes />,
+        errorElement: <ErrorPage />,
         children: [
           {
             path: "dashboard",
             element: <Dashboard />,
             children: [
               {
-                path: "",
+                path: "main",
                 element: <Main />,
               },
               {
@@ -57,6 +59,10 @@ const Router = createBrowserRouter([
               {
                 path: "buy",
                 element: <Buy />,
+              },
+              {
+                path: "history",
+                element: <History />,
               },
             ],
           },
