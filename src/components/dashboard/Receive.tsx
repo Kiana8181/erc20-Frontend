@@ -22,7 +22,7 @@ const Receive = () => {
   return (
     <Center height="100%">
       <Box
-        width="60%"
+        width="70%"
         borderRadius="24px"
         boxShadow="0px 3px 10px 4px rgba(212, 224, 229, 0.70)"
       >
