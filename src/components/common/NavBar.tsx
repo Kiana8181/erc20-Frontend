@@ -25,6 +25,11 @@ const NavBar = ({ onOpen }: Props) => {
 
   return (
     <HStack
+      zIndex="999"
+      position="fixed"
+      top="0"
+      width="100%"
+      bg="purple.300"
       padding="16px"
       boxShadow="0px 0px 10px 4px rgba(212, 224, 229, 0.30)"
     >
