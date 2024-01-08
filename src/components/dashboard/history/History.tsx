@@ -3,24 +3,22 @@ import {
   Center,
   Spinner,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
-  Tfoot,
   Text,
   Th,
   Thead,
   Tr,
   useColorMode,
 } from "@chakra-ui/react";
-import React from "react";
-import useHistory from "../../hooks/useHistory";
 import { FaRegCreditCard } from "react-icons/fa";
 import { MdGetApp, MdOutlineSend } from "react-icons/md";
+import useHistory from "../../../hooks/useHistory";
+import { ContainerStyle, HeaderStyle } from "./HistoryStyles";
 
 const History = () => {
-  const { toggleColorMode, colorMode } = useColorMode();
+  const { colorMode } = useColorMode();
 
   const { data, isLoading, error } = useHistory();
 
@@ -35,23 +33,8 @@ const History = () => {
 
   return (
     <Center height="100%" p="16px">
-      <Box
-        maxH="85vh"
-        minH="85%"
-        overflowY="scroll"
-        my="auto"
-        boxShadow="0px 10px 10px 4px rgba(212, 224, 229, 0.30)"
-        borderRadius="32px"
-        p="32px"
-      >
-        <Text
-          fontFamily="gilroyMedium"
-          fontSize="32px"
-          fontWeight="700"
-          lineHeight="200%"
-        >
-          Transaction History
-        </Text>
+      <Box sx={ContainerStyle}>
+        <Text sx={HeaderStyle}>Transaction History</Text>
 
         {data?.data === null ? (
           <Text>There are no transactions</Text>

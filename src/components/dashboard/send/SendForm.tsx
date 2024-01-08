@@ -39,8 +39,6 @@ const SendForm = () => {
 
   const { data: balance } = useBalance();
 
-  if (!balance) return null;
-
   const {
     register,
     handleSubmit,
@@ -52,6 +50,8 @@ const SendForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [valueError, setValueError] = useState("");
+
+  if (!balance) return null;
 
   const onSubmit = async (data: FieldValues) => {
     setIsLoading(true);

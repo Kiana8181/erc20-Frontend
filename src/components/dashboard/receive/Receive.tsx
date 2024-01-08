@@ -68,9 +68,7 @@ const Receive = () => {
             colorScheme="purple"
             borderRadius="24px"
             onClick={() => {
-              copyToClipboard(
-                document.getElementById("walletId")?.innerHTML || ""
-              );
+              copyToClipboard(data.data.walletId);
             }}
           >
             Copy

@@ -12,7 +12,7 @@ import Receive from "./components/dashboard/receive/Receive";
 import SendForm from "./components/dashboard/send/SendForm";
 import Send from "./components/dashboard/send/Send";
 import Buy from "./components/dashboard/buy/Buy";
-import History from "./components/dashboard/History";
+import History from "./components/dashboard/history/History";
 
 const Router = createBrowserRouter([
   {
