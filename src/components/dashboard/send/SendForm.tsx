@@ -6,10 +6,7 @@ import {
   FormLabel,
   Input,
   InputGroup,
-  InputRightAddon,
   InputRightElement,
-  NumberInput,
-  NumberInputField,
   Spinner,
   Text,
   useDisclosure,
@@ -18,15 +15,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { isAxiosError } from "axios";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { z } from "zod";
-import ErrorNotify from "../common/ErrorNotify";
-import { InputStyle, TextErrorStyle } from "../common/FormStyle";
-import { SendCoin } from "../common/api-call";
-import useUser from "../../hooks/useUser";
-import authorize from "../../hooks/authorize";
-import useBalance from "../../hooks/useBalance";
-import SuccessModal from "../common/SuccessModal";
+import useBalance from "../../../hooks/useBalance";
+import useUser from "../../../hooks/useUser";
+import ErrorNotify from "../../common/ErrorNotify";
+import { InputStyle, TextErrorStyle } from "../../common/FormStyle";
+import SuccessModal from "../../common/SuccessModal";
+import { SendCoin } from "../../common/api-call";
 
 const schema = z.object({
   receiver: z.string().min(1),
@@ -39,11 +35,11 @@ type FormData = z.infer<typeof schema>;
 const SendForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const navigate = useNavigate();
-
   const { data, isLoading: loading, error } = useUser();
 
   const { data: balance } = useBalance();
+
+  if (!balance) return null;
 
   const {
     register,
@@ -56,12 +52,6 @@ const SendForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [valueError, setValueError] = useState("");
-
-  if (!balance) return null;
-
-  const handleMax = () => {
-    setValue("value", balance.value);
-  };
 
   const onSubmit = async (data: FieldValues) => {
     setIsLoading(true);
@@ -90,6 +80,13 @@ const SendForm = () => {
       }
     }
   };
+
+  if (loading)
+    return (
+      <Center mt="100px">
+        <Spinner />
+      </Center>
+    );
 
   if (error) return <Navigate to="/" />;
 
@@ -141,7 +138,7 @@ const SendForm = () => {
                   <Button
                     colorScheme="purple"
                     borderRadius="32px"
-                    onClick={handleMax}
+                    onClick={() => setValue("value", balance.value)}
                   >
                     max
                   </Button>

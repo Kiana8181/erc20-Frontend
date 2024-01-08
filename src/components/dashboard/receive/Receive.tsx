@@ -1,8 +1,15 @@
-import { Alert, AlertIcon, Box, Button, Center, Text } from "@chakra-ui/react";
-import React from "react";
-import useUser from "../../hooks/useUser";
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Button,
+  Center,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import QRCode from "react-qr-code";
-import authorize from "../../hooks/authorize";
+import useUser from "../../../hooks/useUser";
+import { ContainerStyle, WalletIdStyle } from "./ReceiveStyle";
 
 const Receive = () => {
   const { data, isLoading, error } = useUser();
@@ -19,13 +26,18 @@ const Receive = () => {
     document.body.removeChild(textarea);
   };
 
+  if (isLoading)
+    return (
+      <Center mt="100px">
+        <Spinner />
+      </Center>
+    );
+
+  if (error) throw error;
+
   return (
     <Center height="100%">
-      <Box
-        width="70%"
-        borderRadius="24px"
-        boxShadow="0px 3px 10px 4px rgba(212, 224, 229, 0.70)"
-      >
+      <Box sx={ContainerStyle}>
         <Center mt="16px">
           <Text fontSize="xl">Network: ERC20</Text>
         </Center>
@@ -40,15 +52,7 @@ const Receive = () => {
         />
         <Center mt="32px">
           <Box width="70%" height="40px" border="1px solid" borderRadius="7px">
-            <Text
-              p="8px"
-              wordBreak="break-word"
-              height="28px"
-              id="walletId"
-              overflow="hidden"
-            >
-              {data?.data.walletId}
-            </Text>
+            <Text sx={WalletIdStyle}>{data?.data.walletId}</Text>
           </Box>
         </Center>
         <Center my="32px">
@@ -72,11 +76,6 @@ const Receive = () => {
             Copy
           </Button>
         </Center>
-        {/* <Box width="80%">
-          <Text overflow="hidden" height="20px">
-            {data?.data.walletId}
-          </Text>
-        </Box> */}
       </Box>
     </Center>
   );

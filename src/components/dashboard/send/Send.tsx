@@ -1,6 +1,5 @@
-import { Box, SimpleGrid, Image, Center } from "@chakra-ui/react";
-import React from "react";
-import sendImage from "../../assets/pictures/sent.svg";
+import { Box, Image, SimpleGrid } from "@chakra-ui/react";
+import sendImage from "../../../assets/pictures/sent.svg";
 import SendForm from "./SendForm";
 
 const Send = () => {

@@ -19,10 +19,10 @@ const EmailStyle = {
   fontSize: "16px",
   fontWeight: "400",
   lineHeight: "normal",
+  mb: "16px",
 };
 
 const LinkStyle = {
-  mt: "16px",
   gap: "8px",
   borderRadius: "24px",
   py: "8px",

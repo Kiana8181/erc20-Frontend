@@ -8,9 +8,9 @@ import Layout from "./pages/Layout";
 import PrivateRoutes from "./pages/PrivateRoutes";
 import RedirectPage from "./pages/RedirectPage";
 import Main from "./components/dashboard/main/Main";
-import Receive from "./components/dashboard/Receive";
-import SendForm from "./components/dashboard/SendForm";
-import Send from "./components/dashboard/Send";
+import Receive from "./components/dashboard/receive/Receive";
+import SendForm from "./components/dashboard/send/SendForm";
+import Send from "./components/dashboard/send/Send";
 import Buy from "./components/dashboard/Buy";
 import History from "./components/dashboard/History";
 
