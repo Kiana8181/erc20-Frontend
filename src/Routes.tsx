@@ -11,7 +11,7 @@ import Main from "./components/dashboard/main/Main";
 import Receive from "./components/dashboard/receive/Receive";
 import SendForm from "./components/dashboard/send/SendForm";
 import Send from "./components/dashboard/send/Send";
-import Buy from "./components/dashboard/Buy";
+import Buy from "./components/dashboard/buy/Buy";
 import History from "./components/dashboard/History";
 
 const Router = createBrowserRouter([

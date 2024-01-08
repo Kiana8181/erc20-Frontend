@@ -1,5 +1,5 @@
-import { SimpleGrid, Box, Image } from "@chakra-ui/react";
-import buyImage from "../../assets/pictures/buy.svg";
+import { Box, Image, SimpleGrid } from "@chakra-ui/react";
+import buyImage from "../../../assets/pictures/buy.svg";
 import BuyForm from "./BuyForm";
 
 const Buy = () => {

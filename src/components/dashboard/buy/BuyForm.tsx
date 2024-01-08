@@ -3,9 +3,7 @@ import {
   Button,
   Center,
   FormLabel,
-  Input,
   InputGroup,
-  InputRightAddon,
   InputRightElement,
   NumberInput,
   NumberInputField,
@@ -17,14 +15,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { isAxiosError } from "axios";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import ErrorNotify from "../common/ErrorNotify";
-import { InputStyle, TextErrorStyle } from "../common/FormStyle";
-import { BuyCoin } from "../common/api-call";
-import useUser from "../../hooks/useUser";
-import authorize from "../../hooks/authorize";
-import SuccessModal from "../common/SuccessModal";
+import useUser from "../../../hooks/useUser";
+import ErrorNotify from "../../common/ErrorNotify";
+import { InputStyle, TextErrorStyle } from "../../common/FormStyle";
+import SuccessModal from "../../common/SuccessModal";
+import { BuyCoin } from "../../common/api-call";
+import { HeaderStyle } from "./BuyStyles";
 
 const schema = z.object({
   value: z.string().min(1),
@@ -33,13 +30,11 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const BuyForm = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const staticValue = 2.36;
 
-  const { data: user, isLoading: loading, error } = useUser();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const navigate = useNavigate();
+  const { data: user, isLoading: loading, error } = useUser();
 
   const {
     register,
@@ -49,8 +44,6 @@ const BuyForm = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const [isLoading, setIsLoading] = useState(false);
-
-  const [amount, setAmount] = useState(0);
 
   const onSubmit = async (data: FieldValues) => {
     setIsLoading(true);
@@ -74,19 +67,21 @@ const BuyForm = () => {
     }
   };
 
+  if (loading)
+    return (
+      <Center mt="100px">
+        <Spinner />
+      </Center>
+    );
+
+  if (error) throw error;
+
   return (
     <>
       <Box>
         <Box>
           <Center>
-            <Text
-              fontFamily="gilroyMedium"
-              fontSize="28px"
-              fontWeight="700"
-              lineHeight="normal"
-            >
-              1KC = {staticValue}$
-            </Text>
+            <Text sx={HeaderStyle}>1KC = {staticValue}$</Text>
           </Center>
         </Box>
         <form id="phone-form" onSubmit={handleSubmit(onSubmit)} style={{}}>
