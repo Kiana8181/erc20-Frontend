@@ -59,7 +59,7 @@ const NavBar = ({ onOpen }: Props) => {
       )}
       {pathname === "/home" && localStorage.getItem("tokenKey") && (
         <Button colorScheme="purple" borderRadius="24px" p="8px">
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/dashboard/main">Dashboard</NavLink>
         </Button>
       )}
     </HStack>

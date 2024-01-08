@@ -7,22 +7,25 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import React from "react";
-import logo from "../../../public/logo.svg";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { MdSpaceDashboard } from "react-icons/md";
-import { IoIosSend } from "react-icons/io";
-import { GiReceiveMoney } from "react-icons/gi";
 import { FaRegCreditCard } from "react-icons/fa";
-import { LuHistory } from "react-icons/lu";
-import { GrTransaction } from "react-icons/gr";
+import { GiReceiveMoney } from "react-icons/gi";
 import { ImExit } from "react-icons/im";
+import { IoIosSend } from "react-icons/io";
+import { LuHistory } from "react-icons/lu";
+import { MdSpaceDashboard } from "react-icons/md";
+import { NavLink, useNavigate } from "react-router-dom";
 import avatar from "../../assets/pictures/Avatar.svg";
 import useUser from "../../hooks/useUser";
 
 import logoDark from "../../assets/pictures/logo-dark.svg";
 import logoLight from "../../assets/pictures/logo-light.svg";
 import { ColorModeSwitch } from "../common/ColorModeSwitch";
+import {
+  ContainerStyle,
+  EmailStyle,
+  LinkStyle,
+  NameStyle,
+} from "./SidebarStyle";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -31,124 +34,62 @@ const Sidebar = () => {
 
   const { colorMode } = useColorMode();
 
+  const items = [
+    {
+      title: "Dasboard",
+      link: "/dashboard/main",
+      icon: <MdSpaceDashboard size="30px" />,
+    },
+    {
+      title: "Send",
+      link: "/dashboard/send",
+      icon: <IoIosSend size="30px" />,
+    },
+    {
+      title: "Receive",
+      link: "/dashboard/receive",
+      icon: <GiReceiveMoney size="30px" />,
+    },
+    {
+      title: "Buy",
+      link: "/dashboard/buy",
+      icon: <FaRegCreditCard size="30px" />,
+    },
+    {
+      title: "History",
+      link: "/dashboard/history",
+      icon: <LuHistory size="30px" />,
+    },
+  ];
+
   return (
     <Box
-      borderRadius="32px"
-      boxShadow="0px 10px 10px 4px rgba(212, 224, 229, 0.30)"
-      height="100%"
       bg={colorMode === "dark" ? "purple.600" : "purple.300"}
-      p="16px"
+      sx={ContainerStyle}
     >
       <Box>
         <Center pt="32px">
           <Image src={avatar} />
         </Center>
-        <Text
-          mt="16px"
-          textAlign="center"
-          fontFamily="gilroyMedium"
-          fontSize="20px"
-          fontWeight="700"
-          lineHeight="200%"
-        >
+        <Text sx={NameStyle}>
           {user?.data.firstname} {user?.data.lastname}
         </Text>
-        <Text
-          textAlign="center"
-          fontSize="16px"
-          fontWeight="400"
-          lineHeight="normal"
-        >
-          {user?.data.email}
-        </Text>
+        <Text sx={EmailStyle}>{user?.data.email}</Text>
       </Box>
 
       <Flex gap="12px" flexDirection="column" height="calc(100% - 203px)">
-        <NavLink to="/dashboard/main">
-          {({ isActive }) => (
-            <Flex
-              mt="16px"
-              gap="8px"
-              bg={isActive ? "purple.400" : ""}
-              borderRadius="24px"
-              py="8px"
-              px="16px"
-            >
-              <MdSpaceDashboard size="30px" />
-              <Center>
-                <Text fontWeight={isActive ? "bold" : ""}>Dasboard</Text>
-              </Center>
-            </Flex>
-          )}
-        </NavLink>
-
-        <NavLink to="/dashboard/send">
-          {({ isActive }) => (
-            <Flex
-              gap="8px"
-              bg={isActive ? "purple.400" : ""}
-              borderRadius="24px"
-              py="8px"
-              px="16px"
-            >
-              <IoIosSend size="30px" />
-              <Center>
-                <Text fontWeight={isActive ? "bold" : ""}>Send</Text>
-              </Center>
-            </Flex>
-          )}
-        </NavLink>
-
-        <NavLink to="/dashboard/receive">
-          {({ isActive }) => (
-            <Flex
-              gap="8px"
-              bg={isActive ? "purple.400" : ""}
-              borderRadius="24px"
-              py="8px"
-              px="16px"
-            >
-              <GiReceiveMoney size="30px" />
-              <Center>
-                <Text fontWeight={isActive ? "bold" : ""}>Receive</Text>
-              </Center>
-            </Flex>
-          )}
-        </NavLink>
-
-        <NavLink to="/dashboard/buy">
-          {({ isActive }) => (
-            <Flex
-              gap="8px"
-              bg={isActive ? "purple.400" : ""}
-              borderRadius="24px"
-              py="8px"
-              px="16px"
-            >
-              <FaRegCreditCard size="30px" />
-              <Center>
-                <Text fontWeight={isActive ? "bold" : ""}>Buy</Text>
-              </Center>
-            </Flex>
-          )}
-        </NavLink>
-
-        <NavLink to="/dashboard/history">
-          {({ isActive }) => (
-            <Flex
-              gap="8px"
-              bg={isActive ? "purple.400" : ""}
-              borderRadius="24px"
-              py="8px"
-              px="16px"
-            >
-              <LuHistory size="30px" />
-              <Center>
-                <Text fontWeight={isActive ? "bold" : ""}>History</Text>
-              </Center>
-            </Flex>
-          )}
-        </NavLink>
+        {items.map((item, index) => (
+          <NavLink key={index} to={item.link}>
+            {({ isActive }) => (
+              <Flex bg={isActive ? "purple.400" : ""} sx={LinkStyle}>
+                {item.icon}
+                <Center>
+                  <Text fontWeight={isActive ? "bold" : ""}>{item.title}</Text>
+                </Center>
+              </Flex>
+            )}
+          </NavLink>
+        ))}
 
         <Spacer />
 

@@ -52,60 +52,65 @@ const History = () => {
         >
           Transaction History
         </Text>
-        <TableContainer>
-          <Table variant="striped" colorScheme="purple">
-            {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
-            <Thead>
-              <Tr>
-                <Th></Th>
-                <Th>Date & Time</Th>
-                <Th>Type</Th>
-                <Th>Amount</Th>
-                <Th>Counterparty (Sender/Recipient)</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {data?.data.map((h, index) => (
-                <Tr key={index}>
-                  <Td>
-                    {h.type === "0" ? (
-                      <FaRegCreditCard
-                        size="20px"
-                        color={colorMode === "dark" ? "#FAF089" : "#975A16"}
-                      />
-                    ) : h.type === "1" ? (
-                      <MdOutlineSend
-                        size="20px"
-                        color={colorMode === "dark" ? "#FC8181" : "#9B2C2C"}
-                      />
-                    ) : (
-                      <MdGetApp
-                        size="20px"
-                        color={colorMode === "dark" ? "#68D391" : "#22543D"}
-                      />
-                    )}
-                  </Td>
-                  <Td>{h.date}</Td>
-                  <Td>
-                    {h.type === "0"
-                      ? "Buy"
-                      : h.type === "1"
-                      ? "Give"
-                      : "Receive"}
-                  </Td>
-                  <Td
-                    color={h.type === "1" ? "red" : "green"}
-                    fontWeight="bold"
-                    fontSize="16px"
-                  >
-                    {h.value}
-                  </Td>
-                  <Td>{h.type === "1" ? h.to : h.from}</Td>
+
+        {data?.data === null ? (
+          <Text>There are no transactions</Text>
+        ) : (
+          <TableContainer>
+            <Table variant="striped" colorScheme="purple">
+              {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
+              <Thead>
+                <Tr>
+                  <Th></Th>
+                  <Th>Date & Time</Th>
+                  <Th>Type</Th>
+                  <Th>Amount</Th>
+                  <Th>Counterparty (Sender/Recipient)</Th>
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+              </Thead>
+              <Tbody>
+                {data?.data.map((h, index) => (
+                  <Tr key={index}>
+                    <Td>
+                      {h.type === "0" ? (
+                        <FaRegCreditCard
+                          size="20px"
+                          color={colorMode === "dark" ? "#FAF089" : "#975A16"}
+                        />
+                      ) : h.type === "1" ? (
+                        <MdOutlineSend
+                          size="20px"
+                          color={colorMode === "dark" ? "#FC8181" : "#9B2C2C"}
+                        />
+                      ) : (
+                        <MdGetApp
+                          size="20px"
+                          color={colorMode === "dark" ? "#68D391" : "#22543D"}
+                        />
+                      )}
+                    </Td>
+                    <Td>{h.date}</Td>
+                    <Td>
+                      {h.type === "0"
+                        ? "Buy"
+                        : h.type === "1"
+                        ? "Give"
+                        : "Receive"}
+                    </Td>
+                    <Td
+                      color={h.type === "1" ? "red" : "green"}
+                      fontWeight="bold"
+                      fontSize="16px"
+                    >
+                      {h.value}
+                    </Td>
+                    <Td>{h.type === "1" ? h.to : h.from}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        )}
       </Box>
     </Center>
   );
