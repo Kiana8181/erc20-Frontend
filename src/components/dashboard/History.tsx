@@ -58,7 +58,6 @@ const History = () => {
         ) : (
           <TableContainer>
             <Table variant="striped" colorScheme="purple">
-              {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
               <Thead>
                 <Tr>
                   <Th></Th>

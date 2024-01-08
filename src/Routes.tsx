@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import PrivateRoutes from "./pages/PrivateRoutes";
 import RedirectPage from "./pages/RedirectPage";
-import Main from "./components/dashboard/Main";
+import Main from "./components/dashboard/main/Main";
 import Receive from "./components/dashboard/Receive";
 import SendForm from "./components/dashboard/SendForm";
 import Send from "./components/dashboard/Send";
