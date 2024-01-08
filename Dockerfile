@@ -2,7 +2,7 @@ From node:19-alpine3.16
 
 WORKDIR /usr/src/app
 
-ENV VITE_API_URL "https://api.applymorning.com"
+ENV VITE_API_URL "http://localhost:8080"
 
 EXPOSE 4173
 
