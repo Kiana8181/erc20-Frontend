@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Center,
   Spinner,
   Table,
@@ -9,6 +10,7 @@ import {
   Text,
   Th,
   Thead,
+  Tooltip,
   Tr,
   useColorMode,
 } from "@chakra-ui/react";
@@ -86,7 +88,13 @@ const History = () => {
                     >
                       {h.value}
                     </Td>
-                    <Td>{h.type === "1" ? h.to : h.from}</Td>
+                    <Tooltip label={h.type === "1" ? h.to : h.from}>
+                      <Td maxW="295px" overflow="hidden">
+                        <Button variant="unstyled">
+                          {h.type === "1" ? h.to : h.from}
+                        </Button>
+                      </Td>
+                    </Tooltip>
                   </Tr>
                 ))}
               </Tbody>
