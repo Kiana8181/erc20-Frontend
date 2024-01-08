@@ -1,12 +1,12 @@
-import React from "react";
-import ApiClient from "../services/api-client";
-import { Data } from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
+import ApiClient from "../services/api-client";
+import { FetchResponse } from "../entities/FetchResponse";
+import { User } from "../entities/User";
 
-const apiClient = new ApiClient<Data>("/api/admin/user");
+const apiClient = new ApiClient<FetchResponse<User>>("/api/admin/user");
 
 const useUser = () =>
-  useQuery<Data, Error>({
+  useQuery<FetchResponse<User>, Error>({
     queryKey: ["user"],
     queryFn: apiClient.post,
   });

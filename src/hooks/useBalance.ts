@@ -1,10 +1,6 @@
-import React from "react";
-import ApiClient from "../services/api-client";
 import { useQuery } from "@tanstack/react-query";
-
-interface Balance {
-  value: string;
-}
+import ApiClient from "../services/api-client";
+import { Balance } from "../entities/Balance";
 
 const apiClient = new ApiClient<Balance>("/api/user/balance");
 

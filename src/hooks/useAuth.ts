@@ -1,24 +1,8 @@
-import { CanceledError, isAxiosError } from "axios";
+import { CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../services/api-client";
-
-export interface Data {
-  data: User;
-  message: boolean;
-}
-
-interface User {
-  ID: number;
-  CreatedAt: string;
-  UpdatedAt: string;
-  DeletedAt: string | null;
-  username: string;
-  walletId: string;
-  email: string;
-  firstname: string;
-  lastname: string;
-}
+import { User } from "../entities/User";
 
 const endpoint = "/api/admin/user";
 
